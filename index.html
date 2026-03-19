@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RedditRadar — Personal Discussion Finder</title>
+  <meta name="description" content="A read-only personal dashboard for finding Reddit discussions related to your interests.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-logo">
+        <span class="logo-icon">📡</span>
+        <span class="logo-text">RedditRadar</span>
+      </div>
+      <p class="header-tagline">A read-only search tool to find discussions in your areas of interest</p>
+    </header>
+
+    <!-- Setup Panel -->
+    <div id="setup-panel" class="panel setup-panel">
+      <h2>Connect Your Reddit Account</h2>
+      <p class="setup-desc">Enter your Reddit API credentials to get started. Your credentials are stored only in your browser's local storage and are never sent to any third-party server.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Reddit Username</label>
+          <input type="text" id="input-username" placeholder="your_username">
+        </div>
+        <div class="form-group">
+          <label>Reddit Password</label>
+          <input type="password" id="input-password" placeholder="••••••••">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Client ID</label>
+          <input type="text" id="input-client-id" placeholder="From reddit.com/prefs/apps">
+        </div>
+        <div class="form-group">
+          <label>Client Secret</label>
+          <input type="password" id="input-client-secret" placeholder="From reddit.com/prefs/apps">
+        </div>
+      </div>
+      <button id="btn-save-creds" class="btn btn-primary">Save & Connect</button>
+      <p id="setup-status" class="status-msg"></p>
+    </div>
+
+    <!-- Main App -->
+    <div id="main-app" class="main-app" style="display:none;">
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <div class="form-group" style="flex:1">
+          <label>Subreddit</label>
+          <input type="text" id="input-subreddit" placeholder="e.g. webdev, startups, SaaS">
+        </div>
+        <div class="form-group" style="flex:1">
+          <label>Keyword</label>
+          <input type="text" id="input-keyword" placeholder="e.g. project management">
+        </div>
+        <button id="btn-search" class="btn btn-primary btn-search">🔍 Search</button>
+      </div>
+
+      <!-- Connected user info -->
+      <div class="user-bar">
+        <span>Connected as <strong id="connected-user">—</strong> · <em>Read-only mode</em></span>
+        <button id="btn-disconnect" class="btn btn-ghost btn-sm">Disconnect</button>
+      </div>
+
+      <!-- Results -->
+      <div id="results-area">
+        <div class="empty-state">
+          <span class="empty-icon">📡</span>
+          <h3>Search for discussions</h3>
+          <p>Enter a subreddit and keyword above to find relevant conversations. Click any post to read the full discussion, then open it on Reddit to participate.</p>
+        </div>
+      </div>
+
+      <!-- Post Detail Modal -->
+      <div id="post-modal" class="modal" style="display:none;">
+        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-content">
+          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div id="modal-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>RedditRadar is a read-only search tool. It does not post, comment, vote, or modify any Reddit content. To participate in a discussion, click "Open on Reddit" to go to the post directly.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
